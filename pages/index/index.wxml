@@ -18,6 +18,11 @@
     </block>
   </view>
   <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+    <text class="user-motto">{{motto}}{{environment}}</text>
   </view>
+
+  <button bindtap="test"> test </button>
+  <button bindtap="check"> check </button>
+
+  
 </view>
