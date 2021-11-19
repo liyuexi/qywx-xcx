@@ -57,6 +57,7 @@ Page({
           })
           _this.version();
           _this.qyuse();
+          _this.login();
         }else{
           _this.setData({
             environment: "当前为微信环境"
@@ -64,6 +65,26 @@ Page({
         }
       }
     })
+  },
+
+  login(){
+    wx.qy.login({
+      success: function(res) {
+        if (res.code) {
+          //发起网络请求
+          console.log("code:"+res.code);
+          wx.request({
+            url: 'http://tobdev.ant-xy.com:9900/xcx/login',
+            data: {
+              corp_id:"wwae6d661c97e24e98",
+              code: res.code
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    });
   },
   test(){
     let _this = this
