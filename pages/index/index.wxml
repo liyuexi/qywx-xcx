@@ -21,8 +21,9 @@
     <text class="user-motto">{{motto}}{{environment}}</text>
   </view>
 
+
   <button bindtap="test"> test </button>
   <button bindtap="check"> check </button>
-
+  <view >{{loginRes}}</view>
   
 </view>

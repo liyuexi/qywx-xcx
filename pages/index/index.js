@@ -11,6 +11,7 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
     environment: "环境未知",
+    loginRes:"",
   },
   // 事件处理函数
   bindViewTap() {
@@ -68,16 +69,24 @@ Page({
   },
 
   login(){
+    let _this = this
     wx.qy.login({
       success: function(res) {
         if (res.code) {
           //发起网络请求
           console.log("code:"+res.code);
           wx.request({
-            url: 'http://tobdev.ant-xy.com:9900/xcx/login',
+            url: 'http://localhost:9900/xcx/login',
             data: {
               corp_id:"wwae6d661c97e24e98",
               code: res.code
+            },
+            success (res) {
+              console.log(res.data)
+              _this.setData({
+                loginRes: JSON.stringify(res.data.data.userid)
+              })
+       
             }
           })
         } else {
@@ -89,7 +98,7 @@ Page({
   test(){
     let _this = this
     wx.request({
-      url: 'http://tobdev.ant-xy.com:9900/test', //仅为示例，并非真实的接口地址
+      url: 'http://localhost:9900/test', //仅为示例，并非真实的接口地址
       success (res) {
         wx.showToast({
           title: res.data.data.data,
